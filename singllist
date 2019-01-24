@@ -1,0 +1,97 @@
+
+public class SingLList {
+	private Node top = null;
+
+	public boolean empty() {
+		return top == null;
+	}
+
+	public void addFront(int d) {
+		top = new Node(d, top);
+	}
+
+	public void addBack(int d) {
+		if (top == null) {
+			addFront(d);
+			return;
+		}
+
+		Node temp = top;
+		while (temp.next != null) {
+			temp = temp.next;}
+		temp.next = new Node(d);
+
+	}
+
+	public static SingLList arrayToList(int[] arr) {
+		SingLList aaa = new SingLList();
+
+		for (int a = arr.length - 1; a >= 0; a--) {
+			aaa.addFront(arr[a]);
+		}
+		return aaa;
+
+	}
+
+	public void removeOdd() {
+		Node t = top;
+		if(top.data%2 == 1) {
+			top = top.next;
+		}
+		
+		
+		
+		while (t != null) {
+			if (t.next.data % 2 == 1) {
+				Node next= t.next.next;
+				t.next = next;
+			}
+			t = t.next;
+		}
+
+	}
+
+	public boolean contains(int d) {
+		Node t = top;
+		while (t.next != null) {
+			t = t.next;
+			if (t.data == d) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public void showList() {
+		Node t = top;
+		String out = "";
+		while (t != null) {
+			out += t.data + " ";
+			t = t.next;
+
+		}
+		System.out.println(out);
+
+	}
+
+	public void clear() {
+
+		top = null;
+	}
+
+	public class Node {
+		public int data;
+		Node next;
+
+		Node(int data, Node next) {
+			this.data = data;
+			this.next = next;
+		}
+
+		Node(int data) {
+			this(data, null);
+		}
+
+	}
+}
